@@ -1,0 +1,93 @@
+<ion-header class="ion-no-border">
+<ion-toolbar color="light">
+<ion-buttons slot="start">
+<ion-back-button></ion-back-button>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+<div *ngIf="text && data">
+
+<p align="center"><ion-icon name="person-circle-outline" style="font-size: 50px;"></ion-icon></p>
+
+<h1 align="center" style="line-height: 0.2">{{ data.name }}</h1>
+
+<p align="center" style="color:gray">{{ data.email }}</p>
+
+<p style="width: 90%;margin: auto;border-top: 1px solid black;opacity: 0.2;margin-top: 10%">&nbsp;</p>
+
+
+<ion-row style="padding: 0px 10px;">
+<ion-col size="12">
+<b>{{ text.ecash }} <span style="float:right;color:#db4d4d">{{ data.wallet }}</span></b>
+<small style="display:block;margin-top: 10px">{{ text.ecash_use_desc }}</small>
+</ion-col>
+</ion-row>
+
+<p style="width: 90%;margin: auto;border-top: 1px solid black;opacity: 0.2;margin-top: 5%">&nbsp;</p>
+
+<ion-row style="padding: 0px 10px;" *ngIf="data.rcode">
+<ion-col size="12">
+<b>{{ text.ref_code }} <span style="float:right;color:#db4d4d">{{ data.rcode }}</span></b>
+<small style="display:block;margin-top: 10px">{{ text.ref_code_desc }}</small>
+</ion-col>
+</ion-row>
+
+<p style="width: 90%;margin: auto;border-top: 1px solid black;opacity: 0.2;margin-top: 5%" *ngIf="data.rcode">&nbsp;</p>
+
+
+<h3 style="padding: 5px 20px;font-size: 18px;color:#8a8a8a">{{ text.account_title }}</h3>
+
+<ion-list style="border-radius: 10px;">
+<ion-item detail routerLink="/setting" routerDirection="forward">
+  <ion-label>
+   {{ text.account_title }}
+  </ion-label>
+  <ion-icon name="cog-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item detail routerLink="/my" routerDirection="forward">
+  <ion-label>
+    {{ text.my }}
+  </ion-label>
+  <ion-icon name="cart-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item detail routerLink="/lang" routerDirection="forward">
+  <ion-label>
+   {{ text.lang_setting }}
+  </ion-label>
+  <ion-icon name="flag-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item routerLink="/city" routerDirection="forward" detail>
+  <ion-label>
+    {{ text.change_location }}
+  </ion-label>
+  <ion-icon name="location-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item  detail routerLink="/home" routerDirection="root">
+  <ion-label>
+    {{ text.back_home }}
+  </ion-label>
+  <ion-icon name="home-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item  detail (click)="presentAlert()">
+  <ion-label>
+    Delete My Account
+  </ion-label>
+  <ion-icon name="trash-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item  detail lines="none" (click)="logout()">
+  <ion-label>
+    {{ text.logout }}
+  </ion-label>
+  <ion-icon name="log-out-outline" slot="start"></ion-icon>
+</ion-item>
+</ion-list>
+</div>
+</ion-content>

@@ -1,0 +1,31 @@
+.header
+{
+	background-color: var(--ion-color-primary);
+	height:200px;
+}
+
+ion-content
+{
+  --background:#f4f5f8;
+}
+
+.order_detail
+{
+  background-color: var(--ion-color-light);
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin-top:10px;
+  color:black;
+}
+
+.order_detail ion-row
+{
+  font-size: 12px;
+}
+
+.border
+{
+	border:1px solid black;
+	padding:10px 10px;
+	margin-top:10px
+}

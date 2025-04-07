@@ -1,0 +1,8 @@
+{
+  "name": "new_pos",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

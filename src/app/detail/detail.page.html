@@ -1,0 +1,109 @@
+<ion-header class="ion-no-border">
+<ion-toolbar color="light">
+<ion-buttons slot="start">
+<ion-back-button></ion-back-button>
+</ion-buttons>
+<ion-title *ngIf="data && text">{{ text.order_from }} {{ data.store }}</ion-title>
+
+
+</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+
+<!--Display loading-->
+<ion-list id="skeleton" *ngIf="!data">
+<ion-list-header>
+<ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+</ion-list-header>
+
+<ion-item *ngFor="let fake of fakeData">
+<ion-thumbnail slot="start">
+<ion-skeleton-text></ion-skeleton-text>
+</ion-thumbnail>
+<ion-label>
+<h3>
+<ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+</h3>
+<p>
+<ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+</p>
+<p>
+<ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+</p>
+</ion-label>
+</ion-item>
+
+</ion-list>
+
+<span *ngIf="data">
+
+<div class="map-wrapper" >
+<div #directionsPanel style="display: none"></div>
+<div #map id="map"></div>
+</div>
+
+<div class="ion-padding">
+<ion-row style="background: white;padding: 0px 10px;border-radius: 10px;">
+<ion-col size="12"><h3><ion-icon name="checkmark-circle-outline"></ion-icon> {{ data.status }} <a routerLink="/home" routerDirection="forward" style="float:right;font-size: 14px;margin-top: 7px;">{{ text.go_back }}</a></h3></ion-col>
+<ion-col size="12" style="margin-top: -15px;font-size: 12px;">
+<ion-note *ngIf="data.st == 0">{{ text.order_placed_text }}</ion-note>
+<ion-note *ngIf="data.st == 1">{{ text.order_confirmed_text }}</ion-note>
+<ion-note *ngIf="data.st == 3">{{ text.delivery_assign_text }}</ion-note>
+<ion-note *ngIf="data.st == 4">{{ text.order_on_way }}</ion-note>
+<ion-note *ngIf="tm && data.st == 4"><br><br>{{ text.eta }} {{ tm }}</ion-note>
+</ion-col>
+</ion-row>
+<br>
+<ion-list>
+<ion-list-header>
+<ion-label>
+{{ text.order_detail }} <a routerLink="/my" routerDirection="forward" style="float:right;font-size: 12px;margin-right: 15px;">{{ text.d_view_detail }}</a>
+</ion-label>
+</ion-list-header>
+
+<ion-item>
+  <ion-label>
+   {{ text.d_order_id }}
+   <small  style="float: right;">{{ data.id }}</small>
+  </ion-label>
+  <ion-icon name="create-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item *ngIf="data.dboy_phone">
+  <ion-label>
+   {{ text.call }} 
+   <small  style="float: right;">{{ data.dboy }}</small>
+  </ion-label>
+  <ion-icon name="call-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item>
+  <ion-label>
+   {{ text.sub_total }}
+   <small  style="float: right;">{{ data.currency }}{{ data.total }}</small>
+  </ion-label>
+  <ion-icon name="cash-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item>
+  <ion-label>
+   {{ text.d_payment_method }}
+   <small  style="float: right;" *ngIf="data.payment == 1">{{ text.d_cod }}</small>
+   <small  style="float: right;" *ngIf="data.payment != 1">{{ text.d_online }}</small>
+  </ion-label>
+  <ion-icon name="wallet-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item detail *ngIf="data.chat == 1" href="https://wa.me/{{ data.wno }}?text=Hi *{{ data.store }}* My Order id is {{ data.id }}, i would like to know about my order." target="_blank" >
+  <ion-label>
+  {{ text.w_chat }}
+  </ion-label>
+  <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+</ion-item>
+
+</ion-list>
+</div>
+</span>
+</ion-content>
+

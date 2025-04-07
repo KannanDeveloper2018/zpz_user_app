@@ -1,0 +1,40 @@
+<ion-content class="ion-padding" *ngIf="text">
+
+<ion-icon name="arrow-back-outline" style="font-size: 25px;" (click)="closeModal()"></ion-icon>
+<br>
+<h1>{{ text.select_delivery_address }}</h1>
+
+<ion-row style="margin-top: 20%" *ngIf="!address || address.length == 0">
+<ion-col size="12"><p align="center" style="font-size:13px">{{ text.address_msg }}</p>
+
+
+<ion-button expand="block" mode="ios" routerLink="/address" routerDirection="forward" (click)="addAddress()">{{ text.address_add }}</ion-button>
+
+
+</ion-col>
+</ion-row>
+
+
+<div style="overflow-y: scroll;height: 100%;margin-top: 15px;">
+<ion-radio-group value="0" [(ngModel)]="address_id" name="address_id">
+
+<ion-list *ngIf="address && address.length > 0">
+
+<ion-item *ngFor="let a of address" placeholder="let a of address"  lines="none">
+<ion-label class="ion-text-wrap">{{ a.address }}</ion-label>
+<ion-radio slot="start" value="{{ a.id }}" (click)="applyNow(a)" mode="md"></ion-radio>
+</ion-item>
+
+
+
+</ion-list>
+</ion-radio-group>
+</div>
+
+</ion-content>
+<ion-footer *ngIf="address && address.length > 0">
+<div class="ion-padding">
+<p align="center">{{ text.want_new_address }}</p>
+<ion-button expand="block" mode="ios" routerLink="/address" routerDirection="forward" (click)="addAddress()">{{ text.address_add }}</ion-button>
+</div>
+</ion-footer>

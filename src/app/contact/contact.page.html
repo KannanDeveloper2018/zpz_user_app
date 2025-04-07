@@ -1,0 +1,91 @@
+<ion-header [translucent]="true" class="ion-no-border">
+<ion-toolbar color="primary">
+<ion-buttons slot="start">
+<ion-back-button></ion-back-button>
+</ion-buttons>
+
+
+</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text && setting">
+
+
+
+<!--Display loading-->
+<ion-list id="skeleton" *ngIf="!data">
+<ion-list-header>
+<ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+</ion-list-header>
+
+<ion-item *ngFor="let fake of fakeData">
+<ion-thumbnail slot="start">
+<ion-skeleton-text></ion-skeleton-text>
+</ion-thumbnail>
+<ion-label>
+<h3>
+<ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+</h3>
+<p>
+<ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+</p>
+<p>
+<ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+</p>
+</ion-label>
+</ion-item>
+
+</ion-list>
+
+<!--Main content start here-->
+<ion-list *ngIf="data">
+<ion-list-header><h3>{{ text.menu_contact }}</h3></ion-list-header>
+
+<ion-item detail href="mailto:{{ setting.email }}">
+<ion-label>{{ text.email_us }}</ion-label>
+<ion-icon name="mail-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item detail href="tel:{{ setting.phone }}">
+<ion-label>{{ text.call_us }}</ion-label>
+<ion-icon name="call-outline" slot="start"></ion-icon>
+</ion-item>
+
+<ion-item lines="none" detail href="https://wa.me/{{ setting.whatsapp }}?text=Hello, i have a query" target="_blank" >
+<ion-label>{{ text.send_msg }}</ion-label>
+<ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+</ion-item>
+
+</ion-list>
+
+<div style="background:white;margin-top: 10px;" class="ion-padding">
+
+<h3>{{ text.any_query }}</h3>
+<form #form="ngForm" (ngSubmit)="send(form.value)" style="margin-top: 15px;"> 
+<ion-item lines="none">
+  <ion-label position="floating">{{ text.signup_name }}</ion-label>
+  <ion-input type="text" ngModel name="name" required></ion-input>
+</ion-item>
+
+<ion-item lines="none">
+  <ion-label position="floating">{{ text.signup_phone }}</ion-label>
+  <ion-input type="tel" ngModel name="phone" required></ion-input>
+</ion-item>
+
+<ion-item lines="none">
+  <ion-label position="floating">{{ text.signup_email }}</ion-label>
+  <ion-input type="email" ngModel name="email" required></ion-input>
+</ion-item>
+
+<ion-item lines="none">
+  <ion-label position="floating">{{ text.your_msg }}</ion-label>
+  <ion-textarea type="msg" ngModel name="msg" required></ion-textarea>
+</ion-item>
+
+<ion-button expand="block" mode="ios" type="submit" [disabled]="!form.valid">{{ text.s_submit }}</ion-button>
+
+</form>
+
+</div>
+
+</ion-content>
