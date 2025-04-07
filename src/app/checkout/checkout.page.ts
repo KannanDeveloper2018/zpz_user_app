@@ -162,6 +162,14 @@ async loadData()
       }
     }
 
+    if (this.addressName != "") {
+      for (let index = 0; index < response?.address.length; index++) {
+        if (response?.address[index]?.address == this.addressName) {
+          this.setAddress(response?.address[index]);
+        }
+      }
+    }
+
     if(response.stock == false)
     {
       this.presentToast(this.text.out_stock_msg_checkout);
